@@ -4,7 +4,7 @@ const InstitutionModel = model('Institution', new Schema({
   name: String,
   address: String,
   tel: String,
-  coords: String,
+  localityId: String,
 }));
 
 module.exports = InstitutionModel;
