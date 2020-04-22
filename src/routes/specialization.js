@@ -2,19 +2,25 @@ const Router = require('express').Router();
 const { validateIdParam } = require('../services/base');
 const {
   add,
+  get,
   getAll,
   update,
-  remove
-} = require('../services/specialities');
+  remove,
+  validate,
+  validateSubIDs
+} = require('../services/specializations');
 
 Router
-  .post('/add', add)
+  .post('/add', validate, validateSubIDs, add)
+
+Router
+  .get('/get/:id', validateIdParam, get)
 
 Router
   .get('/getAll', getAll)
 
 Router
-  .put('/update/:id', validateIdParam, update)
+  .put('/update/:id', validateIdParam, validate, validateSubIDs, update)
 
 Router
   .delete('/delete/:id', validateIdParam, remove);

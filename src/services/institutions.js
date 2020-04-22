@@ -21,11 +21,6 @@ module.exports = {
   },
 
   async get(req, res, next) {
-    if (!req.body.id) {
-      res.sendStatus(400);
-      return;
-    }
-
     let result;
 
     try {
@@ -57,11 +52,6 @@ module.exports = {
   },
 
   async update(req, res, next) {
-    if (!req.body.id) {
-      res.sendStatus(400);
-      return;
-    }
-
     try {
       if (!await LocalityModel.exists({
         _id: req.body.localityId,
@@ -70,8 +60,8 @@ module.exports = {
         return;
       }
 
-      await InstitutionModel.update({
-        _id: req.body.id
+      await InstitutionModel.updateOne({
+        _id: req.params.id
       }, req.body)
     } catch(e) {
       next(e)
@@ -81,14 +71,9 @@ module.exports = {
   },
 
   async remove(req, res, next) {
-    if (!req.body.id) {
-      res.sendStatus(400);
-      return;
-    }
-
     try {
       await InstitutionModel.deleteOne({
-        _id: req.body.id,
+        _id: req.params.id,
       })
     } catch(e) {
       next(e)

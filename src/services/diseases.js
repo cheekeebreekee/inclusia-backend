@@ -31,7 +31,7 @@ module.exports = {
   },
 
   async update(req, res, next) {
-    if (!req.body.id || !req.body.newName) {
+    if (!req.body.name) {
       res.sendStatus(400);
       return;
     }
@@ -39,31 +39,32 @@ module.exports = {
     let result;
 
     try {
-      result = await DiseaseModel.update({
-        _id: req.body.id
+      result = await DiseaseModel.updateOne({
+        _id: req.params.id
       },{
-        name: req.body.newName,
+        name: req.body.name,
       })
     } catch(e) {
       next(e)
     }
+
+    console.log(result);
 
     res.sendStatus(200);
   },
 
   async remove(req, res, next) {
-    if (!req.body.id) {
-      res.sendStatus(400);
-      return;
-    }
+    let result;
 
     try {
-      await DiseaseModel.deleteOne({
-        _id: req.body.id,
+      result = await DiseaseModel.deleteOne({
+        _id: req.params.id,
       })
     } catch(e) {
       next(e)
     }
+
+    console.log(result);
 
     res.sendStatus(200);
   }

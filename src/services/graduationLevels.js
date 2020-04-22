@@ -31,7 +31,7 @@ module.exports = {
   },
 
   async update(req, res, next) {
-    if (!req.body.id || !req.body.newName) {
+    if (!req.body.name) {
       res.sendStatus(400);
       return;
     }
@@ -39,10 +39,10 @@ module.exports = {
     let result;
 
     try {
-      result = await DiseaseModel.update({
-        _id: req.body.id
+      result = await DiseaseModel.updateOne({
+        _id: req.params.id
       },{
-        name: req.body.newName,
+        name: req.body.name,
       })
     } catch(e) {
       next(e)
@@ -52,14 +52,9 @@ module.exports = {
   },
 
   async remove(req, res, next) {
-    if (!req.body.id) {
-      res.sendStatus(400);
-      return;
-    }
-
     try {
       await GraduationLevelModel.deleteOne({
-        _id: req.body.id,
+        _id: req.params.id,
       })
     } catch(e) {
       next(e)

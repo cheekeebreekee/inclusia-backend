@@ -1,4 +1,5 @@
 const Router = require('express').Router();
+const { validateIdParam } = require('../services/base');
 const {
   add,
   get,
@@ -12,15 +13,15 @@ Router
   .post('/add', validate, add)
 
 Router
-  .get('/get', get)
+  .get('/get/:id', validateIdParam, get)
 
 Router
   .get('/getAll', getAll)
 
 Router
-  .put('/update', validate, update)
+  .put('/update/:id', validateIdParam, validate, update)
 
 Router
-  .delete('/delete', remove);
+  .delete('/delete/:id', validateIdParam, remove);
 
 module.exports = Router;
