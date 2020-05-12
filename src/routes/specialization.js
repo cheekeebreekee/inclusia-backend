@@ -9,6 +9,7 @@ const {
   validate,
   validateSubIDs
 } = require('../services/specializations');
+const { aggregate } = require('../services/specializationsAggregation');
 
 Router
   .post('/add', validate, validateSubIDs, add)
@@ -24,5 +25,8 @@ Router
 
 Router
   .delete('/delete/:id', validateIdParam, remove);
+
+Router
+  .get('/aggregate', aggregate)
 
 module.exports = Router;

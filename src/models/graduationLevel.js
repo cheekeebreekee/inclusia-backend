@@ -1,6 +1,6 @@
 const { Schema, model } = require('../../loaders/db');
 
-const GraduationLevelModel = model('Graduation Level', new Schema({
+const GraduationLevelModel = model('GraduationLevel', new Schema({
   name: String,
 }));
 

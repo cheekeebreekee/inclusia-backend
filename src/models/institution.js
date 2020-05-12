@@ -4,7 +4,7 @@ const InstitutionModel = model('Institution', new Schema({
   name: String,
   address: String,
   tel: String,
-  localityId: String,
+  localityId: { type: Schema.Types.ObjectId, ref: 'Locality' },
 }));
 
 module.exports = InstitutionModel;
